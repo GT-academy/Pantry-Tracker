@@ -1,0 +1,54 @@
+{% extends "pantry/base.html" %}
+
+{% block content %}
+<h1>Artículos en Despensa</h1>
+<a href="/agregar/" class="btn btn-primary mb-3">Agregar Artículo</a>
+
+{% if articulos_por_caducar %}
+<div class="alert alert-warning">
+    <strong>¡Atención!</strong> Artículos por caducar:
+    <ul>
+        {% for item in articulos_por_caducar %}
+        <li>{{ item.nombre }} (Caduca: {{ item.fecha_caducidad }})</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Fecha Caducidad</th>
+            <th>Acciones</th>
+        </tr>
+        <a href="/exportar/" class="btn btn-info mb-3">Exportar a CSV</a>
+        <a href="/historial/" class="btn btn-secondary mb-3">Ver Historial</a>
+    </thead>
+    <tbody>
+        {% for item in articulos %}
+        <tr>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>{{ item.fecha_caducidad }}</td>
+            <td>
+                <a href="/usar/{{ item.id }}" class="btn btn-success btn-sm">Usar</a>
+                <a href="/eliminar/{{ item.id }}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+            <td>
+                <a href="/usar/{{ item.id }}" class="btn btn-success btn-sm">Usar</a>
+                <a href="/editar/{{ item.id }}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="/eliminar/{{ item.id }}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>          
+        </tr>
+        {% endfor %}
+        <form method="GET" class="mb-3">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Buscar artículo..." value="{{ query }}">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </div>
+        </form>        
+    </tbody>
+</table>
+{% endblock %}

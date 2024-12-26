@@ -1,0 +1,21 @@
+{% extends "pantry/base.html" %}
+
+{% block content %}
+<h1>Editar Artículo</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre del artículo</label>
+        <input type="text" name="nombre" class="form-control" id="nombre" value="{{ articulo.nombre }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="cantidad" class="form-label">Cantidad</label>
+        <input type="number" name="cantidad" class="form-control" id="cantidad" value="{{ articulo.cantidad }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="fecha_caducidad" class="form-label">Fecha de Caducidad</label>
+        <input type="date" name="fecha_caducidad" class="form-control" id="fecha_caducidad" value="{{ articulo.fecha_caducidad }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+</form>
+{% endblock %}

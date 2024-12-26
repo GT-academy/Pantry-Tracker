@@ -1,0 +1,23 @@
+{% extends "pantry/base.html" %}
+
+{% block content %}
+<h1>Historial de Artículos Usados</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Fecha Caducidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in usados %}
+        <tr>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>{{ item.fecha_caducidad }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
